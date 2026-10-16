@@ -14,10 +14,11 @@ import kotlin.random.Random
 class MainActivity: Activity() {
  private lateinit var game: GameView
  override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); requestedOrientation=ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE; game=GameView(); setContentView(game) }
- inner class GameView: View(this) {
+ private data class UnitCard(val name:String,var hp:Int,val atk:Int,var used:Boolean=false)
+    inner class GameView: View(this) {
   private val paint=Paint(3); private val rect=RectF(); private val hit=mutableListOf<Pair<RectF,()->Unit>>()
   private var origin=0; private var face=2; private var hair=1; private var skin=0; private var eyes=0; private var outfit=0; private var hairColor=0; private var page="menu"; private var player="Duelista"; private var style=0; private var scene=0; private var turn=1; private var chosen=-1; private var attacker=-1; private var message="Selecione uma carta da mão"; private var defeated=0; private var lost=0
-  private data class UnitCard(val name:String,var hp:Int,val atk:Int,var used:Boolean=false)
+
   private val allies=arrayOfNulls<UnitCard>(5); private val foes=arrayOfNulls<UnitCard>(5); private val hand=mutableListOf<UnitCard>(); private var reserve=mutableListOf<UnitCard>()
   private val names=listOf("Maxxor","Intress","Toborn","Blazier","Frafdo","Heptadd","Najarin","Owis")
   private val dialogues=listOf("Tom: Ei! Você é novo por aqui?", "Você: Onde estou? Esse lugar é o Chaotic?", "Kaz: Exatamente! Quer aprender a duelar?", "Tom: Escolha suas cartas e prepare o campo.", "Kaz: Vamos ver se você consegue me vencer!")
