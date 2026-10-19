@@ -53,11 +53,11 @@ class MainActivity: Activity() {
   }
   private fun creatorV02(){art(creatorArt)
     // Overlays preserve the supplied illustration and expose actual choices.
-    drawBox(34f,329f,245f,30f,color("#081226"),color("#4387B5"));txt(player,45f,350f,20f)
+    drawBox(74f,343f,235f,34f,color("#081226"),color("#4387B5"));txt(player,86f,368f,22f)
     val origins=listOf("OVERWORLD","UNDERWORLD","M'ARRILLIAN")
     // A arte original já exibe as informações da origem.
-    hotspot(35f,328f,245f,32f){editName()}
-    for(i in 0..2)hotspot(35f+i*85f,385f,80f,60f){origin=i;choose()}
+    hotspot(74f,343f,235f,36f){editName()}
+    for(i in 0..2)hotspot(75f+i*82f,394f,77f,66f){origin=i;choose()}
     for(i in 0..4){hotspot(720f+i*43f,104f,40f,48f){face=i;choose()};hotspot(720f+i*43f,201f,40f,48f){hair=i;choose()};hotspot(730f+i*43f,357f,39f,65f){outfit=i;choose()}}
     for(i in 0..3)hotspot(785f+i*30f,156f,28f,23f){skin=i;choose()}
     for(i in 0..6)hotspot(790f+i*22f,253f,20f,23f){hairColor=i;choose()}
