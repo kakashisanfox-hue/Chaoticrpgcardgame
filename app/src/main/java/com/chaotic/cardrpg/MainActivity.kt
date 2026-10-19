@@ -30,7 +30,6 @@ class MainActivity: Activity() {
   private fun glow(x:Float,y:Float,w:Float,h:Float,selected:Boolean){if(!selected)return;val t=(SystemClock.uptimeMillis()-animationStart)%1200L/1200f;paint.color=Color.argb((120+110*kotlin.math.abs(kotlin.math.sin(t*3.14159))).toInt(),80,235,255);paint.strokeWidth=4f;paint.style=Paint.Style.STROKE;canvasRef.drawRoundRect(RectF(x,y,x+w,y+h),9f,9f,paint);paint.style=Paint.Style.FILL;postInvalidateDelayed(70)}
   private fun goBack(){when(page){"creator","help"->page="menu";"story"->page="creator";"duel"->{AlertDialog.Builder(this@MainActivity).setTitle("Sair do duelo?").setMessage("O duelo atual será perdido.").setPositiveButton("Sair"){_,_->page="menu";invalidate()}.setNegativeButton("Cancelar",null).show();return};else->page="menu"};invalidate()}
   private fun backButton(){button("‹ VOLTAR",25f,16f,148f,43f){goBack()}}
-  private fun preview(){val skins=intArrayOf(0xFFF1C9A4.toInt(),0xFFCE9870.toInt(),0xFF9A6349.toInt(),0xFF603C30.toInt());val hairs=intArrayOf(0xFF202027.toInt(),0xFF6C3D24.toInt(),0xFFE9BD59.toInt(),0xFFB74C4A.toInt(),0xFF647AC1.toInt(),0xFFB5B6C0.toInt(),0xFF51A59B.toInt());val clothes=intArrayOf(0xFF28539C.toInt(),0xFF9B3344.toInt(),0xFF368569.toInt(),0xFF7751A1.toInt(),0xFFB18D3C.toInt());paint.color=clothes[outfit%5];canvasRef.drawOval(RectF(400f,346f,565f,510f),paint);paint.color=skins[skin%4];canvasRef.drawOval(RectF(426f,175f,535f,365f),paint);paint.color=hairs[hairColor%7];canvasRef.drawOval(RectF(419f,155f,541f,220f+hair*6f),paint);paint.color=Color.WHITE;canvasRef.drawOval(RectF(448f,265f,466f,280f),paint);canvasRef.drawOval(RectF(493f,265f,511f,280f),paint);paint.color=intArrayOf(Color.BLUE,Color.GREEN,Color.DKGRAY,Color.MAGENTA,Color.YELLOW,Color.BLACK)[eyes%6];canvasRef.drawCircle(457f,272f,5f,paint);canvasRef.drawCircle(502f,272f,5f,paint)}
   private val allies=arrayOfNulls<UnitCard>(5); private val foes=arrayOfNulls<UnitCard>(5); private val hand=mutableListOf<UnitCard>(); private var reserve=mutableListOf<UnitCard>()
   private val names=listOf("Maxxor","Intress","Toborn","Blazier","Frafdo","Heptadd","Najarin","Owis")
   private val dialogues=listOf("Tom: Ei! Você é novo por aqui?", "Você: Onde estou? Esse lugar é o Chaotic?", "Kaz: Exatamente! Quer aprender a duelar?", "Tom: Escolha suas cartas e prepare o campo.", "Kaz: Vamos ver se você consegue me vencer!")
@@ -56,15 +55,15 @@ class MainActivity: Activity() {
     // Overlays preserve the supplied illustration and expose actual choices.
     drawBox(34f,329f,245f,30f,color("#081226"),color("#4387B5"));txt(player,45f,350f,20f)
     val origins=listOf("OVERWORLD","UNDERWORLD","M'ARRILLIAN")
-    txt("Origem: ${origins[origin]}",34f,507f,16f,color("#80FFB8"))
+    // A arte original já exibe as informações da origem.
     hotspot(35f,328f,245f,32f){editName()}
     for(i in 0..2)hotspot(35f+i*85f,385f,80f,60f){origin=i;choose()}
     for(i in 0..4){hotspot(720f+i*43f,104f,40f,48f){face=i;choose()};hotspot(720f+i*43f,201f,40f,48f){hair=i;choose()};hotspot(730f+i*43f,357f,39f,65f){outfit=i;choose()}}
     for(i in 0..3)hotspot(785f+i*30f,156f,28f,23f){skin=i;choose()}
     for(i in 0..6)hotspot(790f+i*22f,253f,20f,23f){hairColor=i;choose()}
     for(i in 0..5)hotspot(793f+i*24f,285f,22f,23f){eyes=i;choose()}
-    drawBox(710f,310f,232f,30f,color("#081226"),color("#A53040"));txt("R${face+1} C${hair+1} P${skin+1} O${eyes+1} V${outfit+1}",719f,332f,17f)
-    preview();for(i in 0..2)glow(35f+i*85f,385f,80f,60f,origin==i)
+    // Sem códigos de depuração sobre a arte.
+    for(i in 0..2)glow(35f+i*85f,385f,80f,60f,origin==i)
     for(i in 0..4){glow(720f+i*43f,104f,40f,48f,face==i);glow(720f+i*43f,201f,40f,48f,hair==i);glow(730f+i*43f,357f,39f,65f,outfit==i)}
     for(i in 0..3)glow(785f+i*30f,156f,28f,23f,skin==i)
     for(i in 0..6)glow(790f+i*22f,253f,20f,23f,hairColor==i)
